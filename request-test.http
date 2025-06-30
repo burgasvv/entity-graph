@@ -1,0 +1,92 @@
+
+### Department Requests
+
+###
+GET /departments
+Host: localhost:9000
+Accept: application/json
+
+###
+GET /departments/by-id?departmentId=1
+Host: localhost:9000
+Accept: application/json
+
+###
+POST /departments/create-update
+Host: localhost:9000
+Content-Type: application/json
+
+{
+    "name": "Отдел коммуникации",
+    "description": "Описание отдела коммуникации"
+}
+
+###
+PUT /departments/add-employee?departmentId=3&employeeId=5
+Host: localhost:9000
+
+###
+PUT /departments/remove-employee?departmentId=3&employeeId=5
+Host: localhost:9000
+
+### Employee Requests
+
+###
+GET /employees
+Host: localhost:9000
+Accept: application/json
+
+###
+GET /employees/by-id?employeeId=1
+Host: localhost:9000
+Accept: application/json
+
+###
+GET /employees/by-task?taskId=1
+Host: localhost:9000
+Accept: application/json
+
+###
+POST /employees/create-update
+Host: localhost:9000
+Content-Type: application/json
+
+{
+    "name": "Василиса",
+    "surname": "Евтушенко",
+    "patronymic": "Дмитриевна",
+    "departmentId": 3
+}
+
+###
+PUT /employees/add-task?employeeId=1&taskId=7
+Host: localhost:9000
+
+###
+PUT /employees/remove-task?employeeId=1&taskId=7
+Host: localhost:9000
+
+###
+PUT /employees/add-task-list?employeeId=1&taskIds[]=2&taskIds[]=3&taskIds[]=5
+Host: localhost:9000
+
+###
+PUT /employees/remove-task-list?employeeId=1&taskIds[]=2&taskIds[]=3&taskIds[]=5
+Host: localhost:9000
+
+### Task Requests
+
+###
+GET /tasks
+Host: localhost:9000
+Accept: application/json
+
+###
+GET /tasks/by-id?taskId=1
+Host: localhost:9000
+Accept: application/json
+
+###
+PUT /tasks/complete-task?taskId=1
+Host: localhost:9000
+Accept: application/json
