@@ -11,3 +11,15 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: entity_graph_db
       PGDATA: /var/lib/data/postgresql
+
+  entity-graph:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "9000:9000"
+    depends_on:
+      - entity-graph-postgres
+    restart: unless-stopped
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://entity-graph-postgres:5432/entity_graph_db
