@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import static jakarta.persistence.CascadeType.*;
+import static jakarta.persistence.FetchType.*;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -31,7 +32,7 @@ public class Department extends AbstractEntity implements Serializable {
     @OneToMany(
             mappedBy = "department",
             cascade = {PERSIST, MERGE, DETACH},
-            fetch = FetchType.EAGER
+            fetch = EAGER
     )
     private List<Employee> employees;
 
