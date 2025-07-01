@@ -32,6 +32,14 @@ public class DepartmentController {
                 .body(this.departmentService.findAll());
     }
 
+    @GetMapping(value = "/all-by-manager")
+    public ResponseEntity<List<DepartmentResponse>> getAllDepartmentsByManager() {
+        return ResponseEntity
+                .status(OK)
+                .contentType(APPLICATION_JSON)
+                .body(this.departmentService.findAllByManager());
+    }
+
     @GetMapping(value = "/by-id")
     public ResponseEntity<DepartmentResponse> getDepartmentById(@RequestParam Long departmentId) {
         return ResponseEntity

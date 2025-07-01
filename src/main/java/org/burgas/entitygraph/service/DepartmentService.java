@@ -1,5 +1,7 @@
 package org.burgas.entitygraph.service;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.burgas.entitygraph.dto.DepartmentRequest;
@@ -34,8 +36,21 @@ public class DepartmentService {
     private final DepartmentMapper departmentMapper;
     private final EmployeeRepository employeeRepository;
 
+    @PersistenceContext
+    private final EntityManager entityManager;
+
     public List<DepartmentResponse> findAll() {
         return this.departmentRepository.findAll()
+                .parallelStream()
+                .map(this.departmentMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    public List<DepartmentResponse> findAllByManager() {
+        return this.entityManager.createQuery(
+                "select d from org.burgas.entitygraph.entity.Department d join fetch d.employees", Department.class
+                )
+                .getResultList()
                 .parallelStream()
                 .map(this.departmentMapper::toResponse)
                 .collect(Collectors.toList());

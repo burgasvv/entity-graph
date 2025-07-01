@@ -7,6 +7,8 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static jakarta.persistence.CascadeType.*;
+import static jakarta.persistence.FetchType.*;
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
@@ -31,7 +33,7 @@ public class Task extends AbstractEntity implements Serializable {
     private LocalDateTime doneAt;
     private Boolean done;
 
-    @ManyToMany(mappedBy = "tasks")
+    @ManyToMany(mappedBy = "tasks", cascade = {PERSIST, MERGE}, fetch = EAGER)
     private List<Employee> employees;
 
     public void addEmployee(Employee employee) {

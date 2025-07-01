@@ -30,7 +30,8 @@ public class Department extends AbstractEntity implements Serializable {
 
     @OneToMany(
             mappedBy = "department",
-            cascade = {PERSIST, MERGE, DETACH}
+            cascade = {PERSIST, MERGE, DETACH},
+            fetch = FetchType.EAGER
     )
     private List<Employee> employees;
 
