@@ -16,15 +16,15 @@ import java.util.Optional;
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
     @Override
-    @Query(value = "select t from org.burgas.entitygraph.entity.Task t join fetch t.employees")
+    @EntityGraph(value = "task-with-employees-and-department")
     @NotNull List<Task> findAll();
 
     @Override
-    @EntityGraph(value = "task-with-employees")
+    @EntityGraph(value = "task-with-employees-and-department")
     @NotNull List<Task> findAllById(@NotNull Iterable<Long> longs);
 
     @Override
-    @Query(value = "select t from org.burgas.entitygraph.entity.Task t join fetch t.employees where t.id = :aLong")
+    @EntityGraph(value = "task-with-employees-and-department")
     @NotNull Optional<Task> findById(@NotNull Long aLong);
 
     @Lock(value = LockModeType.PESSIMISTIC_WRITE)

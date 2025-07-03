@@ -19,8 +19,14 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @AllArgsConstructor
 @NamedEntityGraph(
-        name = "task-with-employees",
-        attributeNodes = @NamedAttributeNode(value = "employees")
+        name = "task-with-employees-and-department",
+        attributeNodes = @NamedAttributeNode(value = "employees", subgraph = "department-employees"),
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "department-employees",
+                        attributeNodes = @NamedAttributeNode(value = "department")
+                )
+        }
 )
 public class Task extends AbstractEntity implements Serializable {
 
